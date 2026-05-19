@@ -1,0 +1,11 @@
+p {
+  font-weight: bold;
+  color: blue;
+}
+img {
+  border-radius: 50%;
+  background-color: red;
+}
+div {
+  background-color: lightblue;
+}
