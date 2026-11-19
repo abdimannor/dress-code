@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
@@ -13,20 +13,83 @@
   <meta name="twitter:title" content="Dress Code">
   <meta name="twitter:description" content="The same content styled three ways: external CSS, internal CSS, and inline CSS.">
   <style>
-    body { font-family: sans-serif; max-width: 480px; margin: 3rem auto; padding: 0 1rem; }
-    h1 { margin-bottom: 0.5rem; }
-    ul { list-style: none; padding: 0; margin: 1.5rem 0; }
-    li { margin: 0.75rem 0; }
-    a { font-size: 1.05rem; }
+    :root { --ink: #1e293b; --muted: #526077; --line: #dbe4ee; --accent: #1d4ed8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #eef4f8; color: var(--ink); font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .wrap { max-width: 64rem; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) 1.25rem 3rem; }
+    h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 0.75rem; }
+    .intro { max-width: 42rem; color: var(--muted); font-size: 1.1rem; margin: 0 0 2.5rem; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.9em; background: #e2eaf3; padding: 0.1em 0.35em; border-radius: 4px; }
+    .methods { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+    .method { background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06); display: flex; flex-direction: column; }
+    .method h2 { margin: 0 0 0.25rem; font-size: 1.4rem; letter-spacing: -0.01em; }
+    .method pre { margin: 1rem 0; padding: 0.85rem 1rem; background: #0f172a; color: #e2e8f0; border-radius: 10px; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; }
+    .method pre code { background: none; padding: 0; color: inherit; }
+    .method dl { margin: 0 0 1.25rem; display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 0.9rem; font-size: 0.95rem; }
+    .method dt { font-weight: 600; }
+    .method dd { margin: 0; color: var(--muted); }
+    .method a { margin-top: auto; align-self: flex-start; display: inline-block; padding: 0.6rem 1.1rem; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
+    .method a:hover { background: #1e3a8a; }
+    .method a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    h2.section { font-size: 1.3rem; margin: 3rem 0 0.75rem; }
+    .cascade { max-width: 42rem; margin: 0; padding-left: 1.25rem; }
+    .cascade li { margin-bottom: 0.5rem; }
+    .foot { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
   </style>
 </head>
 <body>
-  <h1>Dress Code</h1>
-  <p>Three ways to apply CSS to the same content:</p>
-  <ul>
-    <li><a href="external.html">External CSS</a></li>
-    <li><a href="internal.html">Internal CSS</a></li>
-    <li><a href="inline.html">Inline CSS</a></li>
-  </ul>
+  <main class="wrap">
+    <h1>Dress Code</h1>
+    <p class="intro">The same page, dressed three ways. A greeting, a photo and a text box, styled with exactly the same rules. The three versions look identical; only where the CSS is written changes.</p>
+
+    <ul class="methods">
+      <li class="method">
+        <h2>External CSS</h2>
+        <pre><code>&lt;link rel="stylesheet"
+      href="style.css"&gt;</code></pre>
+        <dl>
+          <dt>Where</dt><dd>A separate <code>.css</code> file, linked in the head</dd>
+          <dt>Reach</dt><dd>Every page that links it</dd>
+          <dt>Specificity</dt><dd>Normal selector specificity; cached by the browser</dd>
+        </dl>
+        <a href="external.html">Open external.html</a>
+      </li>
+      <li class="method">
+        <h2>Internal CSS</h2>
+        <pre><code>&lt;style&gt;
+  p { color: #1d4ed8; }
+&lt;/style&gt;</code></pre>
+        <dl>
+          <dt>Where</dt><dd>A <code>&lt;style&gt;</code> block in the head</dd>
+          <dt>Reach</dt><dd>This one page</dd>
+          <dt>Specificity</dt><dd>Same as external; whichever comes later in the document wins a tie</dd>
+        </dl>
+        <a href="internal.html">Open internal.html</a>
+      </li>
+      <li class="method">
+        <h2>Inline CSS</h2>
+        <pre><code>&lt;p style="color: #1d4ed8;"&gt;
+  Välkommen!
+&lt;/p&gt;</code></pre>
+        <dl>
+          <dt>Where</dt><dd>A <code>style</code> attribute on the element</dd>
+          <dt>Reach</dt><dd>That single element</dd>
+          <dt>Specificity</dt><dd>Beats any selector in a stylesheet (only <code>!important</code> overrides it)</dd>
+        </dl>
+        <a href="inline.html">Open inline.html</a>
+      </li>
+    </ul>
+
+    <h2 class="section">When they compete</h2>
+    <ol class="cascade">
+      <li>An inline <code>style</code> attribute wins over rules in a file or a <code>&lt;style&gt;</code> block.</li>
+      <li>Between an external and an internal rule with the same specificity, the one that appears later in the document wins: a <code>&lt;style&gt;</code> block after the <code>&lt;link&gt;</code> overrides the file.</li>
+      <li>In practice: shared look in an external file, page-specific tweaks internal, inline only when there is no other way.</li>
+    </ol>
+
+    <footer class="foot">
+      <p>Reworked from a 2023 course exercise; the original is in the git history.</p>
+    </footer>
+  </main>
 </body>
 </html>
