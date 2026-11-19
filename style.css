@@ -4,6 +4,7 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
+  grid-template-rows: 1fr auto;
   padding: 2rem 1rem;
   box-sizing: border-box;
   background-color: #eef4f8;
@@ -47,4 +48,10 @@ nav a {
   margin-top: 1.5rem;
   color: #1d4ed8;
   font-size: 0.95rem;
+}
+footer p {
+  margin: 1.5rem 0 0;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: #1e293b;
 }
