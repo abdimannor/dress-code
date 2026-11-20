@@ -30,7 +30,7 @@ open index.html
 
 On Windows or Linux, double-click the file or drag it into a browser window instead of `open`.
 
-A private copy runs at [dress-code-bay.vercel.app](https://dress-code-bay.vercel.app/) on Vercel. It sits behind Vercel Authentication, so it opens only for signed-in members of the Vercel team; everyone else is sent to a login page. Every push to `master` redeploys it.
+Live at [dress-code-bay.vercel.app](https://dress-code-bay.vercel.app/), hosted on Vercel and open to everyone. Every push to `master` redeploys it.
 
 ## License
 
