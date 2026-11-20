@@ -66,6 +66,32 @@
     .ar-rank small { font-size: .85rem; }
     @media (max-width: 60rem) { .ar-grid { grid-template-columns: 1fr; } .ar-controls { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); } }
     @media (prefers-reduced-motion: reduce) { .arena h2 span, .ar-ring { transition: none; } }
+    /* ===== Predict the winner ===== */
+    .pq[hidden] { display: none; }
+    .pq { margin-top: 3rem; background: #fff; border: 3px solid var(--ink); border-radius: 22px; padding: 1.5rem; box-shadow: 8px 8px 0 var(--ink); }
+    .pq-title { margin: 0 0 .5rem; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: -.04em; line-height: 1; text-transform: uppercase; }
+    .pq-intro, .pq-progress { color: var(--muted); margin: 0 0 1rem; max-width: 42rem; }
+    .pq-progress { font: 700 .8rem ui-monospace, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .pq-setup { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+    .pq-setup li { padding: .4rem .75rem; border: 2px solid var(--ink); border-left: 10px solid var(--c); border-radius: 10px; font-size: .95rem; }
+    .pq-setup li.is-off { color: var(--muted); border-style: dashed; text-decoration: line-through; }
+    .pq-picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr)); gap: .6rem; margin-bottom: 1rem; }
+    .arena .pq-picks button { font-size: 1rem; padding: .8rem; border-left: 12px solid var(--c); }
+    .arena .pq-picks button[aria-pressed=true] { background: var(--c); color: #fff; }
+    .arena .pq-reveal, .arena .pq-next { background: #fde047; padding: .7rem 1.2rem; font-size: .95rem; box-shadow: 4px 4px 0 var(--ink); }
+    .arena .pq-reveal:disabled { opacity: .5; cursor: default; box-shadow: none; }
+    .pq-explain { margin: 1rem 0 0; max-width: 46rem; }
+    .pq-explain.is-right strong { color: #15803d; }
+    .pq-explain.is-wrong strong { color: #be123c; }
+    .pq-next { margin-top: 1rem; }
+    .pq-motion { display: inline-flex; gap: .5rem; align-items: center; margin-top: 1.25rem; font-weight: 700; font-size: .9rem; cursor: pointer; }
+    .pq-motion input { width: 1.1rem; height: 1.1rem; accent-color: var(--ink); }
+    /* Motion is off when the system asks for reduced motion; the switch turns it back on. */
+    @media (prefers-reduced-motion: reduce) {
+      .motion-on .arena h2 span { transition: color .25s; }
+      .motion-on .ar-ring { transition: border-color .25s; }
+    }
+    html.motion-off .arena h2 span, html.motion-off .ar-ring { transition: none; }
   </style>
 </head>
 <body>
@@ -149,9 +175,26 @@
         </div>
         <ol class="ar-rank" aria-label="Ranking, winner first"></ol>
       </div>
+      <div class="pq" id="predict" aria-labelledby="pq-title" hidden>
+        <h3 id="pq-title" class="pq-title">Predict the winner</h3>
+        <p class="pq-intro">A quiz in the arena. Each round sets up a fight: read the setup, call the colour, then reveal. The arena above switches to that setup and the browser shows who really wins.</p>
+        <p class="pq-progress" id="pq-progress"></p>
+        <ul class="pq-setup" id="pq-setup" aria-label="This round's setup"></ul>
+        <div class="pq-picks" role="group" aria-label="Your prediction">
+          <button type="button" data-pick="blue" style="--c:#1d4ed8">Blue</button>
+          <button type="button" data-pick="red" style="--c:#be123c">Red</button>
+          <button type="button" data-pick="green" style="--c:#15803d">Green</button>
+          <button type="button" data-pick="black" style="--c:#1e293b">Black</button>
+        </div>
+        <button type="button" class="pq-reveal" id="pq-reveal" disabled>Reveal</button>
+        <p class="pq-explain" id="pq-explain" role="status" aria-live="polite"></p>
+        <button type="button" class="pq-next" id="pq-next" hidden>Next round</button>
+        <label class="pq-motion"><input type="checkbox" id="pq-motion"> <span>Motion: animate colour changes</span></label>
+      </div>
     </section>
 
   </main>
   <script src="arena.js" defer></script>
+  <script src="predict.js" defer></script>
 </body>
 </html>
