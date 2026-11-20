@@ -94,6 +94,7 @@
   $('#pq-next').addEventListener('click', () => {
     if (i < ROUNDS.length - 1) { i++; show(); $('#pq-setup').scrollIntoView({ block: 'nearest' }); return; }
     $('#pq-progress').textContent = 'Final score ' + score + ' of ' + ROUNDS.length;
+    if (window.courseDone) window.courseDone();
     $('#pq-explain').className = 'pq-explain';
     $('#pq-explain').textContent = 'Order of power: !important first, then the style attribute, then whichever sheet comes last.';
     $('#pq-next').textContent = 'Play again';

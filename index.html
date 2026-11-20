@@ -13,7 +13,7 @@
   <meta name="twitter:title" content="Dress Code">
   <meta name="twitter:description" content="The same content styled three ways: external CSS, internal CSS, and inline CSS.">
   <style>
-    :root { --ink: #1e293b; --muted: #526077; --line: #e8d37a; --accent: #1d4ed8; }
+    :root { --ink: #1e293b; --muted: #526077; --line: #e8d37a; --accent: #1d4ed8; --course-bg: #1e293b; --course-ink: #fff1b8; --course-accent: #ffd23f; }
     * { box-sizing: border-box; }
     body { margin: 0; background: #fff1b8; color: var(--ink); font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
     .wrap { max-width: 64rem; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) 1.25rem 3rem; }
@@ -93,8 +93,18 @@
     }
     html.motion-off .arena h2 span, html.motion-off .ar-ring { transition: none; }
   </style>
+  <link rel="stylesheet" href="course.css">
 </head>
 <body>
+  <nav class="course-bar" lang="sv" aria-label="Kursen">
+    <p class="course-name">Kurs</p>
+    <ol>
+      <li><a href="https://hello-web-kappa.vercel.app/"><span class="course-num">Lektion 1</span> Hello Web<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://tech-world-zeta.vercel.app/"><span class="course-num">Lektion 2</span> Tech World<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://link-lab-flax.vercel.app/"><span class="course-num">Lektion 3</span> Link Lab<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://dress-code-bay.vercel.app/" aria-current="page"><span class="course-num">Lektion 4</span> Dress Code<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+    </ol>
+  </nav>
   <main class="wrap">
     <h1>Dress Code</h1>
     <p class="intro">The same page, dressed three ways. A greeting, a photo and a text box, styled with exactly the same rules. The three versions look identical; only where the CSS is written changes.</p>
@@ -194,7 +204,12 @@
     </section>
 
   </main>
+  <nav class="course-next" lang="sv" aria-label="N&auml;sta lektion">
+    <p>Sista lektionen. Kursen b&ouml;rjar om h&auml;r</p>
+    <a href="https://hello-web-kappa.vercel.app/">Lektion 1: Hello Web &rarr;</a>
+  </nav>
   <script src="arena.js" defer></script>
   <script src="predict.js" defer></script>
+  <script src="course.js" defer></script>
 </body>
 </html>
