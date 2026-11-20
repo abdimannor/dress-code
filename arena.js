@@ -52,7 +52,7 @@
       return '<li class="' + (i === 0 ? 'is-win' : '') + '" style="--c:' + s.color + '"><span class="ar-place">' + (i + 1) + '</span>' +
         '<span><strong>' + s.label + (x.imp ? ' !important' : '') + '</strong> <code></code><br><small>' + why + '</small></span></li>';
     }).join('') : '<li class="is-none"><span class="ar-place">0</span><span>No author CSS at all: the paragraph falls back to the default black.</span></li>';
-    rank.querySelectorAll('code').forEach((c, i) => { c.textContent = SRC[r[i].k].where; });
+    rank.querySelectorAll('code').forEach((c, i) => { c.textContent = (r[i].k === 'external' && r[i].imp) ? '<link href="arena-important.css">' : SRC[r[i].k].where; });
     frame.onload = () => {
       const p = frame.contentDocument && frame.contentDocument.querySelector('p');
       const got = p ? frame.contentWindow.getComputedStyle(p).color : '?';
