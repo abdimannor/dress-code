@@ -35,6 +35,37 @@
     .cascade { max-width: 42rem; margin: 0; padding-left: 1.25rem; }
     .cascade li { margin-bottom: 0.5rem; }
     .foot { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+
+    /* ===== Specificity arena ===== */
+    .arena[hidden] { display: none; }
+    .arena { --win: #1d4ed8; margin-top: 4.5rem; }
+    .arena h2 { font-size: clamp(3rem, 11vw, 7.5rem); line-height: .85; letter-spacing: -.06em; margin: 0 0 1rem; text-transform: uppercase; font-weight: 900; }
+    .arena h2 span { display: block; color: var(--win); transition: color .25s; -webkit-text-stroke: 2px var(--ink); }
+    .arena-intro { max-width: 42rem; color: var(--muted); font-size: 1.1rem; margin: 0 0 2rem; }
+    .ar-grid { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) minmax(0, 17rem); gap: 1.25rem; align-items: stretch; }
+    .ar-controls { display: grid; gap: .75rem; align-content: start; }
+    .ar-src { background: #fff; border: 3px solid var(--ink); border-left: 12px solid var(--c); border-radius: 14px; padding: .8rem .9rem; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; box-shadow: 5px 5px 0 var(--ink); }
+    .ar-src h3 { grid-column: 1 / -1; margin: 0; font-size: 1.1rem; }
+    .ar-where { grid-column: 1 / -1; margin: 0; font-size: .85rem; }
+    .arena button { font: 700 .85rem ui-monospace, Menlo, monospace; cursor: pointer; border: 2px solid var(--ink); border-radius: 8px; padding: .45rem .5rem; background: #fff; color: var(--ink); }
+    .arena button[aria-pressed=true] { background: var(--ink); color: #fff1b8; }
+    .arena button[data-field=imp][aria-pressed=true] { background: #dc2626; border-color: #7f1d1d; color: #fff; }
+    .arena button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .ar-order { background: #fde047 !important; color: var(--ink) !important; box-shadow: 4px 4px 0 var(--ink); }
+    .ar-order[aria-pressed=true] { background: var(--ink) !important; color: #fde047 !important; }
+    .ar-ring { display: grid; grid-template-rows: 1fr auto; border: 6px solid var(--win); border-radius: 22px; background: #fff; overflow: hidden; box-shadow: 0 0 0 6px #fff1b8, 0 0 0 9px var(--ink), 12px 14px 0 9px var(--ink); transition: border-color .25s; min-height: 20rem; }
+    .ar-ring iframe { width: 100%; height: 100%; min-height: 16rem; border: 0; display: block; }
+    .ar-verdict { margin: 0; padding: .75rem 1rem; background: var(--ink); color: #fff1b8; font-size: .9rem; }
+    .ar-verdict code { background: rgb(255 255 255 / .12); }
+    .ar-rank { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; align-content: start; }
+    .ar-rank li { display: grid; grid-template-columns: 2.5rem 1fr; gap: .6rem; align-items: center; background: #fff; border-radius: 14px; padding: .7rem .8rem; border: 2px solid var(--line); opacity: .75; }
+    .ar-rank li.is-win { opacity: 1; border: 3px solid var(--ink); background: var(--c); color: #fff; box-shadow: 5px 5px 0 var(--ink); }
+    .ar-rank li.is-win code { background: rgb(255 255 255 / .2); color: #fff; }
+    .ar-place { font-size: 2rem; font-weight: 900; text-align: center; color: var(--c, var(--muted)); }
+    .ar-rank li.is-win .ar-place { color: #fde047; }
+    .ar-rank small { font-size: .85rem; }
+    @media (max-width: 60rem) { .ar-grid { grid-template-columns: 1fr; } .ar-controls { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); } }
+    @media (prefers-reduced-motion: reduce) { .arena h2 span, .ar-ring { transition: none; } }
   </style>
 </head>
 <body>
@@ -87,9 +118,43 @@
       <li>In practice: shared look in an external file, page-specific tweaks internal, inline only when there is no other way.</li>
     </ol>
 
+    <section class="arena" id="arena" aria-labelledby="arena-title" hidden>
+      <h2 id="arena-title"><span>Specificity</span> arena</h2>
+      <p class="arena-intro">One paragraph, three dressers. The external file says blue, the <code>&lt;style&gt;</code> block says red, the <code>style</code> attribute says green. Switch sources and <code>!important</code> on and off and watch who wins.</p>
+      <div class="ar-grid">
+        <div class="ar-controls">
+        <div class="ar-src" style="--c:#1d4ed8">
+          <h3>External</h3>
+          <p class="ar-where"><code>arena.css</code></p>
+          <button type="button" data-src="external" data-field="on" aria-pressed="true">On</button>
+          <button type="button" data-src="external" data-field="imp" aria-pressed="false">!important</button>
+        </div>
+        <div class="ar-src" style="--c:#be123c">
+          <h3>Internal</h3>
+          <p class="ar-where"><code>&lt;style&gt;</code></p>
+          <button type="button" data-src="internal" data-field="on" aria-pressed="true">On</button>
+          <button type="button" data-src="internal" data-field="imp" aria-pressed="false">!important</button>
+        </div>
+        <div class="ar-src" style="--c:#15803d">
+          <h3>Inline</h3>
+          <p class="ar-where"><code>style=&quot;&quot;</code></p>
+          <button type="button" data-src="inline" data-field="on" aria-pressed="true">On</button>
+          <button type="button" data-src="inline" data-field="imp" aria-pressed="false">!important</button>
+        </div>
+          <button type="button" class="ar-order" data-order aria-pressed="false">Put &lt;style&gt; before &lt;link&gt;</button>
+        </div>
+        <div class="ar-ring">
+          <iframe id="arena-frame" title="The contested paragraph"></iframe>
+          <p class="ar-verdict" role="status" aria-live="polite"></p>
+        </div>
+        <ol class="ar-rank" aria-label="Ranking, winner first"></ol>
+      </div>
+    </section>
+
     <footer class="foot">
       <p>&copy; 2026 Mahad Abdullahi</p>
     </footer>
   </main>
+  <script src="arena.js" defer></script>
 </body>
 </html>
