@@ -4,23 +4,76 @@
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dress Code — Internal CSS</title>
-	<style>
-		p {
-			font-weight: bold;
-			color: blue;
-		}
-		img {
-			border-radius: 50%;
-		}
-		div {
-			background-color: lightblue;
-		}
-	</style>
+  <title>Dress Code: Internal CSS</title>
+  <style>
+    /* Internal CSS: rules in a <style> block, for this page only. */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      grid-template-rows: 1fr auto;
+      padding: 2rem 1rem;
+      box-sizing: border-box;
+      background-color: #fff1b8;
+      color: #1e293b;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+    main {
+      width: 100%;
+      max-width: 26rem;
+      box-sizing: border-box;
+      padding: 2.5rem 2rem;
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      text-align: center;
+    }
+    p {
+      margin: 0 0 1.5rem;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1d4ed8;
+    }
+    img {
+      display: block;
+      width: 220px;
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: cover;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+    }
+    div {
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      background-color: lightblue;
+      line-height: 1.5;
+    }
+    nav a {
+      display: inline-block;
+      margin-top: 1.5rem;
+      color: #1d4ed8;
+      font-size: 0.95rem;
+    }
+    footer p {
+      margin: 1.5rem 0 0;
+      font-size: 0.9rem;
+      font-weight: normal;
+      color: #1e293b;
+    }
+  </style>
 </head>
 <body>
-	<p>Välkommen!</p>
-	<img src="example.jpg" alt="Närbild på en vit sjöfågel med orange näbb">
-	<div>Idag ska vi lära oss om hur man skapar CSS på 3 olika sätt.</div>
+  <main>
+    <p>Välkommen!</p>
+    <img src="example.jpg" alt="Närbild på en vit sjöfågel med orange näbb" width="850" height="637">
+    <div>Idag ska vi lära oss om hur man skapar CSS på 3 olika sätt.</div>
+    <nav aria-label="Tillbaka"><a href="index.html">Jämför de tre sätten</a></nav>
+  </main>
+  <footer>
+    <p>&copy; 2026 Mahad Abdullahi</p>
+  </footer>
 </body>
 </html>

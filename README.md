@@ -8,14 +8,15 @@ The same three elements, a paragraph, an image and a box of text, styled three t
 | `internal.html` | Internal | In a `<style>` block in the head |
 | `inline.html` | Inline | In a `style` attribute on each element |
 
-## What to look at
+## The reworked version
 
-- **Same result, different reach.** The three pages look the same: bold blue text, a round image (`border-radius: 50%`) and a light blue box. The method does not change what CSS can do, only where it is written and how far it reaches. An external file can serve many pages, an internal block covers one page, and an inline style covers one element.
-- **Repetition.** Compare `inline.html` with `internal.html`. Inline styles have to be written on every element, so styling a second paragraph means copying the attribute. The selectors in the other two versions (`p`, `img`, `div`) apply to every matching element at once.
-- **Which rule wins.** If one page used all three methods for the same property, the inline style would win, because a `style` attribute outranks any selector in a stylesheet. Between an internal and an external rule with the same specificity, such as the plain element selectors used here, the one that appears later in the document wins. A `<style>` block placed after the `<link>` overrides the file, and one placed before it does not.
-- **A leftover.** `style.css` also gives `img` a red background (line 7) that the other two versions lack. It never shows, because the JPEG has no transparent pixels and the image has no padding, but it means the three versions are not quite identical.
+The lesson is unchanged: the three pages still use the three methods. The original is in the git history.
 
-The example image now has alt text on all three pages.
+- **Identical by construction.** The three versions share exactly the same declarations (a centred card, a round photo, a light blue box), written once as a file, once as a `<style>` block and once as `style` attributes. Screenshots of the three pages are pixel-identical at desktop and mobile width.
+- **Repetition shows.** `inline.html` now needs a long `style` attribute on every element, including `<body>` and `<main>`, which is the clearest argument for the other two methods.
+- **The red leftover is gone.** `style.css` used to give `img` a red background that never showed (the JPEG has no transparent pixels and no padding) and that the other two versions lacked. It has been removed.
+- **A comparison index.** `index.html` explains each method side by side: syntax, where it lives, its reach and how it ranks, plus a short note on which wins when they compete. Its `lang` is now `en`, matching its text.
+- Each version links back to the comparison. The images have width and height set.
 
 ## Open it locally
 
