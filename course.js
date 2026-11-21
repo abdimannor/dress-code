@@ -4,6 +4,7 @@
   /* Framed copies of the page (previews) carry no course chrome. */
   if (window.self !== window.top) {
     for (const el of document.querySelectorAll('.course-bar, .course-next')) el.remove();
+    document.documentElement.classList.add('is-framed');
     return;
   }
   const KEY = 'course-done';
@@ -85,16 +86,22 @@
   window.courseDone = () => { store.set(KEY, '1'); paint(); };
   paint();
 
-  const btn = document.querySelector('.course-motion button');
+  const btn = document.querySelector('.course-motion');
   if (!btn) return;
   const root = document.documentElement;
+  const en = !/^sv/.test(root.lang);
+  const PAUSE = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="7" y="5.5" width="3.4" height="13" rx="1.2"/><rect x="13.6" y="5.5" width="3.4" height="13" rx="1.2"/></svg>';
+  const PLAY = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 5.8v12.4a1 1 0 0 0 1.5.86l10-6.2a1 1 0 0 0 0-1.72l-10-6.2A1 1 0 0 0 8 5.8z"/></svg>';
   function show() {
-    const on = root.dataset.motion === 'on';
+    const on = root.dataset.motion !== 'off';
+    const label = on ? (en ? 'Pause motion' : 'Pausa r\u00f6relse') : (en ? 'Play motion' : 'Starta r\u00f6relse');
     btn.setAttribute('aria-pressed', String(on));
-    btn.textContent = on ? 'R\u00f6relse: p\u00e5' : 'R\u00f6relse: av';
+    btn.setAttribute('aria-label', label);
+    btn.title = label;
+    btn.innerHTML = on ? PAUSE : PLAY;
   }
   btn.addEventListener('click', () => {
-    root.dataset.motion = root.dataset.motion === 'on' ? 'off' : 'on';
+    root.dataset.motion = root.dataset.motion === 'off' ? 'on' : 'off';
     store.set('motion', root.dataset.motion);
     show();
   });
