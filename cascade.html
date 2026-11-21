@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>(()=>{let m=null;try{m=localStorage.getItem('motion')}catch(e){}document.documentElement.dataset.motion=m==='on'||m==='off'?m:(matchMedia('(prefers-reduced-motion: reduce)').matches?'off':'on')})()</script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <title>Dress Code: the whole cascade</title>
+  <meta name="description" content="Which CSS rule wins and why: every declaration for one element, sorted through the six steps of the CSS cascade.">
+  <meta property="og:title" content="Dress Code: the whole cascade">
+  <meta property="og:description" content="Which CSS rule wins and why: every declaration for one element, sorted through the six steps of the CSS cascade.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://dress-code-bay.vercel.app/og.png">
+  <style>
+    :root { --ink: #1e293b; --muted: #526077; --line: #e8d37a; --accent: #1d4ed8; --course-bg: #1e293b; --course-ink: #fff1b8; --course-accent: #ffd23f; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff1b8; color: var(--ink); font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) 1.25rem 3rem; }
+    h1 { font-size: clamp(2.4rem, 8vw, 5rem); line-height: .95; letter-spacing: -0.045em; margin: 0 0 1rem; font-weight: 900; text-transform: uppercase; }
+    h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: -.02em; margin: 3rem 0 .75rem; line-height: 1.1; }
+    .intro, .lede { max-width: 44rem; color: var(--muted); font-size: 1.1rem; }
+    p, li { max-width: 46rem; }
+    a { color: var(--accent); }
+    code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.9em; background: rgb(30 41 59 / 0.08); padding: 0.1em 0.35em; border-radius: 4px; }
+    pre { background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 1rem; overflow-x: auto; font-size: .85rem; line-height: 1.5; }
+    pre code { background: none; padding: 0; }
+    .back { font-weight: 700; }
+    .sources { font-size: .95rem; color: var(--muted); }
+    .sources a { color: #1e3a8a; }
+    button { font: 700 .8rem ui-monospace, Menlo, monospace; cursor: pointer; border: 2px solid var(--ink); border-radius: 8px; padding: .35rem .5rem; background: #fff; color: var(--ink); }
+    button[aria-pressed=true] { background: var(--ink); color: #fff1b8; }
+    button:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.ex[hidden] { display: none; }
+    .ex-pick { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin: 1.5rem 0; font-weight: 700; }
+    select { font: 600 1rem ui-monospace, Menlo, monospace; padding: .5rem .7rem; border: 3px solid var(--ink); border-radius: 10px; background: #fff; color: var(--ink); max-width: 100%; }
+    .ex-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+    .ex-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+    .ex-steps li { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: .55rem .8rem; border: 2px solid var(--ink); border-radius: 10px; background: #fff; max-width: none; }
+    .ex-steps li.is-cut { background: var(--ink); color: #fff1b8; box-shadow: 4px 4px 0 #ca8a04; }
+    .ex-steps li.is-tie span { color: var(--muted); }
+    .ex-stage { border: 4px solid var(--ink); border-radius: 18px; background: #fff; overflow: hidden; box-shadow: 8px 8px 0 var(--ink); }
+    .ex-stage iframe { width: 100%; height: 8rem; border: 0; display: block; }
+    .ex-verdict, .ex-check { margin: 0; padding: .65rem 1rem; font-size: .95rem; max-width: none; }
+    .ex-verdict { background: var(--ink); color: #fff1b8; font-weight: 700; }
+    .ex-check[data-agree=false] { background: #fee2e2; color: #7f1d1d; }
+    .ex-tablewrap { overflow-x: auto; margin-top: 1.5rem; border: 3px solid var(--ink); border-radius: 14px; background: #fff; }
+    table { border-collapse: collapse; width: 100%; font-size: .9rem; min-width: 60rem; }
+    th, td { text-align: left; padding: .5rem .6rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+    th { background: #fde68a; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; }
+    td:nth-child(4), td:nth-child(6) { font-family: ui-monospace, Menlo, monospace; }
+    td button { margin: 0 .25rem .25rem 0; }
+    tr.is-win { background: #dcfce7; font-weight: 700; }
+    tr.is-off { color: var(--muted); }
+    .ex-swatch { display: inline-block; width: .9em; height: .9em; border-radius: 3px; margin-right: .4em; vertical-align: -.1em; border: 1px solid rgb(0 0 0 / .2); }
+    .ex-swatch:not([style]) { display: none; }
+    :root[data-motion="on"] .ex-steps li, :root[data-motion="on"] tr { transition: background-color .25s, color .25s; }
+    .rules { counter-reset: r; list-style: none; padding: 0; display: grid; gap: .6rem; }
+    .rules li { counter-increment: r; padding: .8rem 1rem .8rem 3.2rem; position: relative; background: #fff; border-radius: 12px; border: 2px solid var(--line); }
+    .rules li::before { content: counter(r); position: absolute; left: .9rem; top: .55rem; font: 900 1.6rem/1 system-ui, sans-serif; color: #ca8a04; }
+    @media (max-width: 52rem) { .ex-top { grid-template-columns: 1fr; } }
+
+  </style>
+  <link rel="stylesheet" href="course.css">
+</head>
+<body>
+  <nav class="course-bar" lang="sv" aria-label="Kursen">
+    <p class="course-name">Kurs</p>
+    <ol>
+      <li><a href="https://hello-web-kappa.vercel.app/"><span class="course-num">Lektion 1</span> Hello Web<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://tech-world-zeta.vercel.app/"><span class="course-num">Lektion 2</span> Tech World<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://link-lab-flax.vercel.app/"><span class="course-num">Lektion 3</span> Link Lab<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://dress-code-bay.vercel.app/" aria-current="page"><span class="course-num">Lektion 4</span> Dress Code<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+    </ol>
+    <span class="course-motion"><button type="button" aria-pressed="false">R&ouml;relse</button></span>
+  </nav>
+  <main class="wrap">
+    <p class="back"><a href="index.html">&larr; Dress Code</a></p>
+    <h1>Which rule wins, and why</h1>
+    <p class="intro">The three exhibit pages give the same rules from a file, a <code>&lt;style&gt;</code> block and a <code>style</code> attribute. That is one corner of a bigger machine. When several declarations set the same property on the same element, the browser sorts them through a fixed list of steps, the cascade, and the first one in that order wins. Specificity is only step five.</p>
+
+    <h2>The six steps</h2>
+    <p>The order below is the cascade sorting order in <a href="https://www.w3.org/TR/css-cascade-5/#cascade-sort">CSS Cascading and Inheritance Level 5, section 6.1</a>. A later step only matters when every earlier step ties.</p>
+    <ol class="rules">
+      <li><strong>Origin and importance.</strong> Where the declaration comes from: the browser (user agent), the user, or the page author. Normal author beats normal user beats normal user agent. <code>!important</code> turns the list upside down: important user agent beats important user beats important author. (CSS transitions sit above all of them and animations between important author and normal author.)</li>
+      <li><strong>Context.</strong> Declarations from different encapsulation contexts, such as a shadow tree and the page around it. For normal rules the outer context wins, for important rules the inner one.</li>
+      <li><strong>Element-attached styles.</strong> A <code>style</code> attribute beats any selector with the same origin and importance. This is why inline CSS wins on the exhibit pages, and it is decided before layers and specificity.</li>
+      <li><strong>Layers.</strong> <code>@layer</code> blocks are ordered by first appearance, and styles outside any layer count as one final, implicit layer. For normal declarations the later layer wins; for important ones the earlier layer wins.</li>
+      <li><strong>Specificity.</strong> Ids, then classes, attributes and pseudo-classes, then type selectors: <code>(1,0,0)</code> beats <code>(0,9,9)</code>.</li>
+      <li><strong>Order of appearance.</strong> If everything else ties, the declaration that comes last in the document wins. That is the rule the exhibit pages show between a <code>&lt;link&gt;</code> and a later <code>&lt;style&gt;</code>.</li>
+    </ol>
+
+    <section class="ex" id="explainer" aria-labelledby="ex-title" hidden>
+      <h2 id="ex-title">Cascade explainer</h2>
+      <p>A small demo page. Pick an element and a property: the table lists every declaration that applies to it, sorted by the six steps, with the step where each loser dropped out. Switch declarations on and off or make them <code>!important</code>. The author styles are applied for real in the frame, and the browser's computed value is checked against the sort.</p>
+      <p>The page's author CSS starts with <code>@layer reset, base, theme;</code> so <code>reset</code> is the first layer and unlayered styles come after <code>theme</code>. Try making both layered rules important on the first element: the early <code>reset</code> layer now wins, the reverse of the normal order. Then make the <code>style</code> attribute important as well.</p>
+      <label class="ex-pick" for="ex-scene">Element and property <select id="ex-scene"></select></label>
+      <div class="ex-top">
+        <ol class="ex-steps" id="ex-steps" aria-label="The cascade, step by step"></ol>
+        <div class="ex-stage">
+          <iframe id="ex-frame" title="Demo page with the chosen element"></iframe>
+          <p class="ex-verdict" id="ex-verdict" role="status" aria-live="polite"></p>
+          <p class="ex-check" id="ex-check"></p>
+        </div>
+      </div>
+      <div class="ex-tablewrap" role="region" aria-label="Declarations, winner first" tabindex="0">
+        <table>
+          <thead><tr><th scope="col">Rank</th><th scope="col">Origin</th><th scope="col">Where</th><th scope="col">Selector</th><th scope="col">Specificity</th><th scope="col">Value</th><th scope="col">Switches</th><th scope="col">Why</th></tr></thead>
+          <tbody id="ex-decls"></tbody>
+        </table>
+      </div>
+      <p>The user agent row is the browser's own default stylesheet; its value is whatever this browser computes when no author rule applies, so it can differ between browsers. The user row is simulated: user styles come from the reader (for example a browser setting or extension) and a page cannot create them, so the frame never applies it.</p>
+    </section>
+
+    <h2>Next: what the three ways cost</h2>
+    <p>The cascade decides which rule wins. Where the CSS lives also decides when the page can be painted and what the browser can cache. <a href="cost.html">Measure the three exhibit pages</a>.</p>
+
+    <p class="sources">Sources: <a href="https://www.w3.org/TR/css-cascade-5/">CSS Cascading and Inheritance Level 5</a> (W3C), <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Cascade">Introduction to the CSS cascade</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@layer">@layer</a> (MDN).</p>
+  </main>
+  <nav class="course-next" lang="sv" aria-label="N&auml;sta lektion">
+    <p>Sista lektionen. Kursen b&ouml;rjar om h&auml;r</p>
+    <a href="https://hello-web-kappa.vercel.app/">Lektion 1: Hello Web &rarr;</a>
+  </nav>
+  <script src="cascade.js" defer></script>
+  <script src="course.js" defer></script>
+</body>
+</html>

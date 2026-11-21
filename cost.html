@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>(()=>{let m=null;try{m=localStorage.getItem('motion')}catch(e){}document.documentElement.dataset.motion=m==='on'||m==='off'?m:(matchMedia('(prefers-reduced-motion: reduce)').matches?'off':'on')})()</script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <title>Dress Code: what the three ways cost</title>
+  <meta name="description" content="External, internal and inline CSS measured in your browser with the Performance API: render-blocking, bytes, caching and first paint.">
+  <meta property="og:title" content="Dress Code: what the three ways cost">
+  <meta property="og:description" content="External, internal and inline CSS measured in your browser with the Performance API: render-blocking, bytes, caching and first paint.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://dress-code-bay.vercel.app/og.png">
+  <style>
+    :root { --ink: #1e293b; --muted: #526077; --line: #e8d37a; --accent: #1d4ed8; --course-bg: #1e293b; --course-ink: #fff1b8; --course-accent: #ffd23f; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff1b8; color: var(--ink); font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) 1.25rem 3rem; }
+    h1 { font-size: clamp(2.4rem, 8vw, 5rem); line-height: .95; letter-spacing: -0.045em; margin: 0 0 1rem; font-weight: 900; text-transform: uppercase; }
+    h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: -.02em; margin: 3rem 0 .75rem; line-height: 1.1; }
+    .intro, .lede { max-width: 44rem; color: var(--muted); font-size: 1.1rem; }
+    p, li { max-width: 46rem; }
+    a { color: var(--accent); }
+    code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.9em; background: rgb(30 41 59 / 0.08); padding: 0.1em 0.35em; border-radius: 4px; }
+    pre { background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 1rem; overflow-x: auto; font-size: .85rem; line-height: 1.5; }
+    pre code { background: none; padding: 0; }
+    .back { font-weight: 700; }
+    .sources { font-size: .95rem; color: var(--muted); }
+    .sources a { color: #1e3a8a; }
+    button { font: 700 .8rem ui-monospace, Menlo, monospace; cursor: pointer; border: 2px solid var(--ink); border-radius: 8px; padding: .35rem .5rem; background: #fff; color: var(--ink); }
+    button[aria-pressed=true] { background: var(--ink); color: #fff1b8; }
+    button:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.m[hidden] { display: none; }
+    .m-run { background: #fde047; padding: .7rem 1.2rem; font-size: .95rem; box-shadow: 4px 4px 0 var(--ink); }
+    .m-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+    .m-card { background: #fff; border: 3px solid var(--ink); border-radius: 16px; padding: 1rem 1.1rem; box-shadow: 6px 6px 0 var(--ink); }
+    .m-card h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
+    .m-card dl { display: grid; grid-template-columns: auto 1fr; gap: .3rem .8rem; margin: 0; font-size: .92rem; }
+    .m-card dt { font-weight: 600; }
+    .m-card dd { margin: 0; font-family: ui-monospace, Menlo, monospace; }
+    .m-frames { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .m-frames iframe { width: 100%; height: 18rem; border: 3px solid var(--ink); border-radius: 12px; background: #fff; }
+    .m-status { font-weight: 700; }
+    :root[data-motion="on"] .m-card { transition: transform .3s; }
+    :root[data-motion="on"] .m-card.is-fresh { transform: translateY(-4px); }
+
+  </style>
+  <link rel="stylesheet" href="course.css">
+</head>
+<body>
+  <nav class="course-bar" lang="sv" aria-label="Kursen">
+    <p class="course-name">Kurs</p>
+    <ol>
+      <li><a href="https://hello-web-kappa.vercel.app/"><span class="course-num">Lektion 1</span> Hello Web<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://tech-world-zeta.vercel.app/"><span class="course-num">Lektion 2</span> Tech World<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://link-lab-flax.vercel.app/"><span class="course-num">Lektion 3</span> Link Lab<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://dress-code-bay.vercel.app/" aria-current="page"><span class="course-num">Lektion 4</span> Dress Code<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+    </ol>
+    <span class="course-motion"><button type="button" aria-pressed="false">R&ouml;relse</button></span>
+  </nav>
+  <main class="wrap">
+    <p class="back"><a href="index.html">&larr; Dress Code</a></p>
+    <h1>What the three ways cost</h1>
+    <p class="intro">The three exhibit pages look the same. They do not load the same. This page opens each of them in a frame and reads the browser's own measurements with the Performance API.</p>
+
+    <h2>What to expect</h2>
+    <ul>
+      <li><strong>External CSS is render-blocking.</strong> By default the browser does not paint a page until the stylesheets in its head have arrived and been parsed (<a href="https://web.dev/articles/critical-rendering-path/render-blocking-css">web.dev: Render blocking CSS</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Critical_rendering_path">MDN: Critical rendering path</a>). <code>style.css</code> is a second request before first paint.</li>
+      <li><strong>But it is cached on its own.</strong> The file is a separate resource, so every page that links it can reuse the stored copy (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching">MDN: HTTP caching</a>). How long the copy is used without asking the server depends on the server's cache headers.</li>
+      <li><strong>Internal and inline CSS travel inside the HTML.</strong> No extra request, but no separate cache entry either: the rules are downloaded again with every page that repeats them (unless the HTML itself is cached), and inline styles repeat on every element.</li>
+    </ul>
+
+    <section class="m" id="measure" aria-labelledby="m-title" hidden>
+      <h2 id="m-title">Measure it here</h2>
+      <p>Each press loads <code>external.html</code>, <code>internal.html</code> and <code>inline.html</code> once more. The first run is usually the cold one; on the second, <code>style.css</code> may come from the cache or be revalidated (a small transfer with no body). Numbers vary with network, device, server and what is already cached: compare the pages within one run, not with someone else's numbers.</p>
+      <button type="button" class="m-run" id="m-run">Measure the three pages</button>
+      <p class="m-status" id="m-status" role="status" aria-live="polite"></p>
+      <div class="m-cards" id="m-cards"></div>
+      <div class="m-frames" id="m-frames"></div>
+      <p>What each line means: <em>HTML bytes</em> and <em>CSS bytes</em> are the encoded body sizes of the page and of <code>style.css</code>; <em>transferred</em> is what crossed the network, 0 when the copy came straight from the cache. <em>Render-blocking</em> is the resource's <code>renderBlockingStatus</code> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming/renderBlockingStatus">MDN</a>), reported by Chromium-based browsers only. <em>First paint</em> and <em>first contentful paint</em> come from Paint Timing (<a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming">MDN</a>), in milliseconds from the start of that frame's navigation; a browser may not report them for every frame.</p>
+    </section>
+
+    <h2>So which one?</h2>
+    <p>The advice on the front page holds, now with reasons: shared look in an external file, because the cache pays for the extra request after the first page; page-specific tweaks in a <code>&lt;style&gt;</code> block; inline only when there is no other way, because it repeats with every element and beats every normal author rule; only <code>!important</code> rules and animations beat it (<a href="cascade.html">see the cascade</a>).</p>
+    <p class="sources">Sources: <a href="https://web.dev/articles/critical-rendering-path/render-blocking-css">web.dev</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming">MDN: PerformanceResourceTiming</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming">MDN: PerformancePaintTiming</a>.</p>
+  </main>
+  <nav class="course-next" lang="sv" aria-label="N&auml;sta lektion">
+    <p>Sista lektionen. Kursen b&ouml;rjar om h&auml;r</p>
+    <a href="https://hello-web-kappa.vercel.app/">Lektion 1: Hello Web &rarr;</a>
+  </nav>
+  <script src="cost.js" defer></script>
+  <script src="course.js" defer></script>
+</body>
+</html>

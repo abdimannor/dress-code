@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>(()=>{let m=null;try{m=localStorage.getItem('motion')}catch(e){}document.documentElement.dataset.motion=m==='on'||m==='off'?m:(matchMedia('(prefers-reduced-motion: reduce)').matches?'off':'on')})()</script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <title>Dress Code</title>
@@ -41,6 +42,8 @@
     h2.section { font-size: 1.3rem; margin: 3rem 0 0.75rem; }
     .cascade { max-width: 42rem; margin: 0; padding-left: 1.25rem; }
     .cascade li { margin-bottom: 0.5rem; }
+    .cascade-more { max-width: 42rem; font-weight: 600; }
+    .cascade-more a { color: #1e3a8a; }
     .foot { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
 
     /* ===== Specificity arena ===== */
@@ -111,6 +114,7 @@
       <li><a href="https://link-lab-flax.vercel.app/"><span class="course-num">Lektion 3</span> Link Lab<span class="course-mark" hidden> &#10003; Klar</span></a></li>
       <li><a href="https://dress-code-bay.vercel.app/" aria-current="page"><span class="course-num">Lektion 4</span> Dress Code<span class="course-mark" hidden> &#10003; Klar</span></a></li>
     </ol>
+    <span class="course-motion"><button type="button" aria-pressed="false">R&ouml;relse</button></span>
   </nav>
   <main class="wrap">
     <h1>Dress Code</h1>
@@ -160,6 +164,7 @@
       <li>Between an external and an internal rule with the same specificity, the one that appears later in the document wins: a <code>&lt;style&gt;</code> block after the <code>&lt;link&gt;</code> overrides the file.</li>
       <li>In practice: shared look in an external file, page-specific tweaks internal, inline only when there is no other way.</li>
     </ol>
+    <p class="cascade-more">The whole answer to which rule wins and why: <a href="cascade.html">the six steps of the cascade, with an explainer</a>. And what each way costs when the page loads: <a href="cost.html">measured in your browser</a>.</p>
 
     <section class="arena" id="arena" aria-labelledby="arena-title" hidden>
       <h2 id="arena-title"><span>Specificity</span> arena</h2>
