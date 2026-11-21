@@ -11,6 +11,8 @@ function watch(page) {
 }
 
 async function axe(page, disable = []) {
+  // Let the entrance animation finish: half-faded text is not what a reader sees.
+  await page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished.catch(() => {}))));
   await page.addScriptTag({ path: AXE });
   const result = await page.evaluate(async (off) => {
     const rules = Object.fromEntries(off.map((id) => [id, { enabled: false }]));
