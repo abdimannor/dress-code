@@ -150,7 +150,7 @@
           b.type = 'button';
           b.textContent = f === 'on' ? 'On' : '!important';
           b.setAttribute('aria-pressed', String(d[f]));
-          b.setAttribute('aria-label', (f === 'on' ? 'Use ' : '!important on ') + where(d) + ' ' + d.sel);
+          b.setAttribute('aria-label', (f === 'on' ? 'On: ' : '!important: ') + where(d) + ' ' + d.sel);
           b.addEventListener('click', () => { d[f] = !d[f]; render(); });
           tdc.append(b);
         }
@@ -187,7 +187,6 @@
     check.textContent = 'Browser check: the frame computes ' + scene.prop + ': ' + got + '. ' +
       (agree ? 'That matches the model' : 'That does NOT match the model (' + expect + ')') +
       (user ? ' for author and browser styles; a page cannot add user styles, so the user row is only simulated.' : '.');
-    for (const d of scene.decls) if (d.origin === 'ua') d.value = null;
   });
 
   for (const [k, s] of Object.entries(SCENES)) {
