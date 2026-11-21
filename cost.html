@@ -68,7 +68,7 @@
     <ul>
       <li><strong>External CSS is render-blocking.</strong> By default the browser does not paint a page until the stylesheets in its head have arrived and been parsed (<a href="https://web.dev/articles/critical-rendering-path/render-blocking-css">web.dev: Render blocking CSS</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Critical_rendering_path">MDN: Critical rendering path</a>). <code>style.css</code> is a second request before first paint.</li>
       <li><strong>But it is cached on its own.</strong> The file is a separate resource, so every page that links it can reuse the stored copy (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching">MDN: HTTP caching</a>). How long the copy is used without asking the server depends on the server's cache headers.</li>
-      <li><strong>Internal and inline CSS travel inside the HTML.</strong> No extra request, but no separate cache entry either: the rules are downloaded again with every page that repeats them, and inline styles repeat on every element.</li>
+      <li><strong>Internal and inline CSS travel inside the HTML.</strong> No extra request, but no separate cache entry either: the rules are downloaded again with every page that repeats them (unless the HTML itself is cached), and inline styles repeat on every element.</li>
     </ul>
 
     <section class="m" id="measure" aria-labelledby="m-title" hidden>
@@ -82,7 +82,7 @@
     </section>
 
     <h2>So which one?</h2>
-    <p>The advice on the front page holds, now with reasons: shared look in an external file, because the cache pays for the extra request after the first page; page-specific tweaks in a <code>&lt;style&gt;</code> block; inline only when there is no other way, because it repeats with every element and beats everything except <code>!important</code> (<a href="cascade.html">see the cascade</a>).</p>
+    <p>The advice on the front page holds, now with reasons: shared look in an external file, because the cache pays for the extra request after the first page; page-specific tweaks in a <code>&lt;style&gt;</code> block; inline only when there is no other way, because it repeats with every element and beats every normal author rule; only <code>!important</code> rules and animations beat it (<a href="cascade.html">see the cascade</a>).</p>
     <p class="sources">Sources: <a href="https://web.dev/articles/critical-rendering-path/render-blocking-css">web.dev</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming">MDN: PerformanceResourceTiming</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming">MDN: PerformancePaintTiming</a>.</p>
   </main>
   <nav class="course-next" lang="sv" aria-label="N&auml;sta lektion">
