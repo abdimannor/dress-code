@@ -20,7 +20,7 @@
   function load(file) {
     return new Promise((resolve) => {
       const f = document.createElement('iframe');
-      f.title = file;
+      f.title = 'Measured page: ' + file;
       f.addEventListener('load', () => {
         // Give paint entries a moment to be queued after load.
         setTimeout(() => resolve(f), 300);
