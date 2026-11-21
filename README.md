@@ -30,7 +30,7 @@ The front page keeps the original comparison plus two interactive parts:
 - **Specificity arena.** One paragraph coloured by an external file, a `<style>` block and a `style` attribute. Toggle each source and `!important`; the frame is rebuilt so the browser resolves the cascade.
 - **Predict the winner.** A quiz on top of the arena. Finishing it marks the lesson done.
 
-The course bar, the next-lesson block and the motion switch come from `course.css` and `course.js`, identical in all four repos. Anything animated stays still when your system asks for reduced motion until you turn the switch on.
+The course bar, the next-lesson block and the motion switch come from `course.css` and `course.js`, which share one design with the other three lessons. Motion is on by default; the pause button turns it off and the choice is remembered.
 
 ## Run it
 
@@ -50,7 +50,7 @@ npx playwright install chromium
 npm test
 ```
 
-The Playwright suite checks that every page loads with no console errors, runs axe on each (the exhibit pages have no `h1` by design, so only that rule is off for them), tests the motion switch in a browser that asks for reduced motion, checks that the explainer and the browser agree in each scenario (including `!important` reversing layers and the user agent origin winning) and runs the measurement. CI also runs the HTML and link checker in `.github/workflows/check.yml`.
+The Playwright suite checks that every page loads with no console errors, runs axe on each (the exhibit pages have no `h1` by design, so only that rule is off for them), checks that motion runs by default in a browser that asks for reduced motion and that the pause button stops it, checks that the explainer and the browser agree in each scenario (including `!important` reversing layers and the user agent origin winning) and runs the measurement. CI also runs the HTML and link checker in `.github/workflows/check.yml`.
 
 ## License
 
