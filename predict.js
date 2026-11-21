@@ -102,15 +102,5 @@
     $('#pq-next').onclick = () => { $('#pq-next').onclick = null; i = 0; show(); };
   });
 
-  /* Motion switch: off by default when the system asks for reduced motion. */
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const sw = $('#pq-motion');
-  sw.checked = !reduce;
-  const apply = () => {
-    document.documentElement.classList.toggle('motion-on', sw.checked);
-    document.documentElement.classList.toggle('motion-off', !sw.checked);
-  };
-  sw.addEventListener('change', apply);
-  apply();
   show();
 })();
