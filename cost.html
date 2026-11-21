@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-scheme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>(()=>{let m=null;try{m=localStorage.getItem('motion')}catch(e){}document.documentElement.dataset.motion=m==='on'||m==='off'?m:(matchMedia('(prefers-reduced-motion: reduce)').matches?'off':'on')})()</script>
+  <script>(()=>{let m=null;try{m=localStorage.getItem('motion')}catch(e){}document.documentElement.dataset.motion=m==='off'?'off':'on'})()</script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <title>Dress Code: what the three ways cost</title>
@@ -13,15 +13,15 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://dress-code-bay.vercel.app/og.png">
   <style>
-    :root { --ink: #1e293b; --muted: #526077; --line: #e8d37a; --accent: #1d4ed8; --course-bg: #1e293b; --course-ink: #fff1b8; --course-accent: #ffd23f; }
+    html:root { --ink: #1e293b; --muted: #526077; --line: #dde1ec; --accent: #e0533d; --accent-ink: #c2412d; }
     * { box-sizing: border-box; }
-    body { margin: 0; background: #fff1b8; color: var(--ink); font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    body { margin: 0; background: #f6f7fb; color: var(--ink); font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
     .wrap { max-width: 72rem; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) 1.25rem 3rem; }
     h1 { font-size: clamp(2.4rem, 8vw, 5rem); line-height: .95; letter-spacing: -0.045em; margin: 0 0 1rem; font-weight: 900; text-transform: uppercase; }
     h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: -.02em; margin: 3rem 0 .75rem; line-height: 1.1; }
     .intro, .lede { max-width: 44rem; color: var(--muted); font-size: 1.1rem; }
     p, li { max-width: 46rem; }
-    a { color: var(--accent); }
+    a { color: var(--accent-ink); }
     code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.9em; background: rgb(30 41 59 / 0.08); padding: 0.1em 0.35em; border-radius: 4px; }
     pre { background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 1rem; overflow-x: auto; font-size: .85rem; line-height: 1.5; }
     pre code { background: none; padding: 0; }
@@ -29,10 +29,10 @@
     .sources { font-size: .95rem; color: var(--muted); }
     .sources a { color: #1e3a8a; }
     button { font: 700 .8rem ui-monospace, Menlo, monospace; cursor: pointer; border: 2px solid var(--ink); border-radius: 8px; padding: .35rem .5rem; background: #fff; color: var(--ink); }
-    button[aria-pressed=true] { background: var(--ink); color: #fff1b8; }
-    button:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    button[aria-pressed=true] { background: var(--ink); color: #f6f7fb; }
+    button:focus-visible, select:focus-visible { outline: 3px solid var(--accent-ink); outline-offset: 2px; }
 .m[hidden] { display: none; }
-    .m-run { background: #fde047; padding: .7rem 1.2rem; font-size: .95rem; box-shadow: 4px 4px 0 var(--ink); }
+    .m-run { background: #ffd6cc; padding: .7rem 1.2rem; font-size: .95rem; box-shadow: 4px 4px 0 var(--ink); }
     .m-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1.25rem; }
     .m-card { background: #fff; border: 3px solid var(--ink); border-radius: 16px; padding: 1rem 1.1rem; box-shadow: 6px 6px 0 var(--ink); }
     .m-card h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
@@ -49,15 +49,15 @@
   <link rel="stylesheet" href="course.css">
 </head>
 <body>
-  <nav class="course-bar" lang="sv" aria-label="Kursen">
-    <p class="course-name">Kurs</p>
+  <nav class="course-bar" aria-label="Course">
+    <p class="course-name" lang="sv">Webbkursen</p>
     <ol>
-      <li><a href="https://hello-web-kappa.vercel.app/"><span class="course-num">Lektion 1</span> Hello Web<span class="course-mark" hidden> &#10003; Klar</span></a></li>
-      <li><a href="https://tech-world-zeta.vercel.app/"><span class="course-num">Lektion 2</span> Tech World<span class="course-mark" hidden> &#10003; Klar</span></a></li>
-      <li><a href="https://link-lab-flax.vercel.app/"><span class="course-num">Lektion 3</span> Link Lab<span class="course-mark" hidden> &#10003; Klar</span></a></li>
-      <li><a href="https://dress-code-bay.vercel.app/" aria-current="page"><span class="course-num">Lektion 4</span> Dress Code<span class="course-mark" hidden> &#10003; Klar</span></a></li>
+      <li><a href="https://hello-web-kappa.vercel.app/"><span class="course-num">1</span> Hello Web<span class="course-mark" hidden> &#10003;</span></a></li>
+      <li><a href="https://tech-world-zeta.vercel.app/"><span class="course-num">2</span> Tech World<span class="course-mark" hidden> &#10003;</span></a></li>
+      <li><a href="https://link-lab-flax.vercel.app/"><span class="course-num">3</span> Link Lab<span class="course-mark" hidden> &#10003;</span></a></li>
+      <li><a href="https://dress-code-bay.vercel.app/" aria-current="page"><span class="course-num">4</span> Dress Code<span class="course-mark" hidden> &#10003;</span></a></li>
     </ol>
-    <span class="course-motion"><button type="button" aria-pressed="false">R&ouml;relse</button></span>
+    <div class="course-controls"><button type="button" class="course-icon course-motion" aria-pressed="true" aria-label="Pause motion" title="Pause motion"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="7" y="5.5" width="3.4" height="13" rx="1.2"/><rect x="13.6" y="5.5" width="3.4" height="13" rx="1.2"/></svg></button></div>
   </nav>
   <main class="wrap">
     <p class="back"><a href="index.html">&larr; Dress Code</a></p>
@@ -85,9 +85,9 @@
     <p>The advice on the front page holds, now with reasons: shared look in an external file, because the cache pays for the extra request after the first page; page-specific tweaks in a <code>&lt;style&gt;</code> block; inline only when there is no other way, because it repeats with every element and beats every normal author rule; only <code>!important</code> rules and animations beat it (<a href="cascade.html">see the cascade</a>).</p>
     <p class="sources">Sources: <a href="https://web.dev/articles/critical-rendering-path/render-blocking-css">web.dev</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming">MDN: PerformanceResourceTiming</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming">MDN: PerformancePaintTiming</a>.</p>
   </main>
-  <nav class="course-next" lang="sv" aria-label="N&auml;sta lektion">
-    <p>Sista lektionen. Kursen b&ouml;rjar om h&auml;r</p>
-    <a href="https://hello-web-kappa.vercel.app/">Lektion 1: Hello Web &rarr;</a>
+  <nav class="course-next" aria-label="Lessons">
+    <a class="prev" href="https://link-lab-flax.vercel.app/"><span class="course-dir">&larr; Previous lesson</span><strong>3 Link Lab</strong></a>
+    <a class="next" href="https://hello-web-kappa.vercel.app/"><span class="course-dir">Last lesson. Start again &rarr;</span><strong>1 Hello Web</strong></a>
   </nav>
   <script src="cost.js" defer></script>
   <script src="course.js" defer></script>
